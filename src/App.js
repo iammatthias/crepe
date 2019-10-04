@@ -1,6 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+
+const logo = "https://picsum.photos/200/300";
 
 function App() {
   return (
