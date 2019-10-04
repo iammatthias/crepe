@@ -9,6 +9,7 @@ const Email = require('../lib/Email').default;
 const STYLE_TAG = '%STYLE%';
 const CONTENT_TAG = '%CONTENT%';
 
+
 function getFile(relativePath) {
   return new Promise((resolve, reject) => {
     const path = Path.join(__dirname, relativePath);
@@ -19,6 +20,7 @@ function getFile(relativePath) {
     })
   });
 }
+
 
 function createEmail(data) {
   return Promise.all([
@@ -37,5 +39,18 @@ function createEmail(data) {
       return emailHTML;
     });
 }
+
+function saveEmail(email) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('build.html', email, err => {
+      if (err) return reject(err);
+      return resolve();
+    });
+  });
+}
+
+createEmail().then(email => {
+  return saveEmail(email);
+});
 
 module.exports = createEmail;
