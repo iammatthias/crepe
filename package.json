@@ -1,5 +1,5 @@
 {
-  "name": "react-emails-example",
+  "name": "crepe",
   "version": "1.0.0",
   "private": true,
   "main": "./server/createEmail.js",
