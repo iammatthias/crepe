@@ -7,26 +7,21 @@
     "@babel/cli": "^7.6.2",
     "@babel/core": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "10.0.3",
+    "babel-eslint": "10.1.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-react-app": "5.0.2",
-    "eslint-plugin-flowtype": "4.3.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.4.0",
-    "node-fetch": "^2.1.2",
-    "prettier": "1.18.2",
-    "react-scripts": "3.2.0"
+    "prettier": "2.3.2",
+    "react-scripts": "4.0.3"
   },
   "dependencies": {
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-html-comment": "^2.0.9",
+    "styled-email-components": "^5.0.3"
   },
   "scripts": {
-    "build": "NODE_ENV=production babel src --out-dir lib",
-    "compile": "yarn build && node ./server/build.js",
+    "build": "babel src --out-dir ./server/lib  && node ./server/build.js",
     "start": "react-scripts start"
   },
   "browserslist": {

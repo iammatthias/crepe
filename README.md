@@ -1,10 +1,12 @@
 # Crepe
-## Create-React-Email-Production-Enviroment
-### Just call it Crepe
 
-A tailored React toolchain for building email templates that render consistently across devices. Based on [React-Email](https://github.com/lang-ai/react-emails), and heavily modified to fit personal use cases.
+## Build emails with React and Styled Components
 
-Pull requests are welcome.
+- `yarn start` to start the dev enviroment
+- `yarn build` to compile with Babel and output the static HTML
 
-## Why build emails with React?
-Consistency, mostly. Template languages like MJML are great, but they produce too much extra markup.
+---
+
+Static HTML is output to the `compiled` folder. Each build creates a new file with a timestamp appended to the name. This behavior can be customized in `./server/createEmail.js`.
+
+Uses a `Condition-padding` button. [Litmus](https://www.litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design/#coding) for details.

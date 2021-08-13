@@ -4,10 +4,31 @@ const Path = require('path');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-const Email = require('../lib/Email').default;
+const Email = require('../server/lib/Email').default;
 
-const STYLE_TAG = '%STYLE%';
 const CONTENT_TAG = '%CONTENT%';
+
+function toIsoString(date) {
+  var tzo = -date.getTimezoneOffset(),
+      dif = tzo >= 0 ? '+' : '-',
+      pad = function(num) {
+          var norm = Math.floor(Math.abs(num));
+          return (norm < 10 ? '0' : '') + norm;
+      };
+
+  return date.getFullYear() +
+      '-' + pad(date.getMonth() + 1) +
+      '-' + pad(date.getDate()) +
+      'T' + pad(date.getHours()) +
+      ':' + pad(date.getMinutes()) +
+      ':' + pad(date.getSeconds()) +
+      dif + pad(tzo / 60) +
+      ':' + pad(tzo % 60);
+}
+
+var timestamp = new Date();
+timestamp.setMilliseconds(0);
+console.log(toIsoString(timestamp));
 
 
 function getFile(relativePath) {
@@ -24,25 +45,23 @@ function getFile(relativePath) {
 
 function createEmail(data) {
   return Promise.all([
-    getFile('../src/inlined.css'),
     getFile('./email.html'),
   ])
-    .then(([style, template]) => {
+    .then(([template]) => {
       const emailElement = React.createElement(Email, { data });
       const content = ReactDOMServer.renderToStaticMarkup(emailElement);
 
       // Replace the template tags with the content
       let emailHTML = template;
       emailHTML = emailHTML.replace(CONTENT_TAG, content);
-      emailHTML = emailHTML.replace(STYLE_TAG, style);
 
       return emailHTML;
-    });
+    }).catch();
 }
 
 function saveEmail(email) {
   return new Promise((resolve, reject) => {
-    fs.writeFile('build.html', email, err => {
+    fs.writeFile('compiled/build-' + toIsoString(timestamp) + '.html', email, err => {
       if (err) return reject(err);
       return resolve();
     });

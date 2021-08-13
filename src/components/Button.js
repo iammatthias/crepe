@@ -1,55 +1,38 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-email-components";
+import ReactComment from "react-html-comment";
 
-function Button({
-  className,
-  borderRadius,
-  color,
-  buttonCopy,
-  url,
-  buttonTextColor,
-  margin,
-  shadow
-}) {
+const Button = styled.a`
+  background-color: #2a2b2b;
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 24px 20px;
+  color: #ffffff;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 160px;
+  miso-padding-alt: 0;
+  span {
+    mso-text-raise: 15pt;
+  }
+`;
+
+function StyledTable({ href, children, ...props }) {
   return (
-    <table
-      align="center"
-      cellPadding="0"
-      cellSpacing="0"
-      role="presentation"
-      style={{
-        margin: margin ? margin : '0 auto 24px'
+    <Button
+      href={href}
+      {...props}
+      dangerouslySetInnerHTML={{
+        __html: `<!--[if mso]><i style="letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;">&nbsp;</i><![endif]-->
+          <span>${children}</span>
+          <!--[if mso]><i style="letter-spacing: 25px; mso-font-width: -100%;">&nbsp;</i><![endif]-->`,
       }}
-    >
-      <tbody>
-        <tr>
-          <td
-            className={className}
-            align="center"
-            bgcolor={color}
-            style={{
-              borderRadius: borderRadius
-            }}
-          >
-            <a
-              className="btn"
-              href={url ? url : 'https://github.com/iammatthias/crepe'}
-              style={{
-                borderRadius: borderRadius,
-                color: buttonTextColor,
-                textDecoration: 'none',
-                textAlign: 'center',
-                padding: '12px 24px',
-                display: 'inline-block',
-                border: '1px solid ' + color
-              }}
-            >
-              {buttonCopy}
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    />
   );
 }
 
-export default Button;
+export default StyledTable;

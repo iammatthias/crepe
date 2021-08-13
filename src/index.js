@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Email from './Email';
 
-import './inlined.css';
-
 ReactDOM.render(
-  <Email  />,
+  <Email />,
   document.getElementById('root')
 );
 
